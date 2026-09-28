@@ -1,6 +1,6 @@
 # The Unofficial Guide
 
-<!-- Replace this line with your name and which corpus you picked. -->
+Michelle Marchesini, i chose advice thread
 
 > **This file is your submission.** Fill it in as you go — most sections get
 > written during the milestone that produces them, not at the end.
@@ -21,26 +21,33 @@
 
 ## What This Does
 
-<!-- Three or four sentences. Which corpus you picked, and the kinds of
-     questions your system answers. Write it for someone who has never seen
-     this repo.
+I chose the advice threads corpus and I asked questions about college/dorm life that freshman specially, would ask. The system reads through the threads and provides an answer to the question.
 
-     Milestone 5. -->
 
 ## Chunking Strategy
 
-**Chunk size:**
-**Overlap:**
+**Chunk size:** N/A — chunks are variable-length, one per forum reply (not a fixed character/token count)
+**Overlap:** None — replies are disjoint by construction, so overlap would just duplicate whole replies rather than smoothing a cut
 
-<!-- What about YOUR documents made you pick these numbers? Short posts and
-     long sectioned guides don't want the same chunking, and "800 seemed
-     reasonable" earns nothing. Point at something you noticed when you read
-     the documents in Milestone 1.
+Reading the documents in advice_thread, the fixed-size character window from
+`fallback_split` (chunk_size=800-ish, with overlap) was clearly wrong for
+this corpus because these aren't long texts, they're short forum threads averaging
+~88 characters per reply, structured as a title followed by
+`--- reply N (votes) ---` blocks. A fixed window either swallowed 5-10
+replies into one chunk (losing the one-sentence-per-idea structure) or, on
+a bigger document, cut a reply in half mid-sentence and produced a
+meaningless fragment paired arbitrarily with the tail of the next one.
 
-     If you changed your mind partway through, say so and say why. That's worth
-     more than pretending you got it right first time.
-
-     Milestone 3. -->
+The natural unit here is the reply itself, not a byte count: each reply is
+already a single, self-contained answer, and the `--- reply N (votes) ---`
+marker is an explicit, reliable boundary the author (well, the platform)
+already drew for us. So `split_documents` splits on that marker instead of
+size, producing one chunk per reply, with the thread's title prepended to
+each chunk so a reply like "Yes, but stack your courses" doesn't lose the
+question it's answering. Overlap has no role here: since chunks track a
+real semantic unit (one reply) rather than an arbitrary window, there's no
+cut edge to smooth over — overlap would only add noise (duplicate reply
+text) without adding safety.
 
 ## Sample Chunks
 
@@ -53,42 +60,51 @@
 
      Milestone 3. -->
 
-**Chunk 1** — source: `` — produced by: ``
+======================================================================
+Chunk 1  |  source: thread_bike_commute.txt#0  |  produced by: chunker.py::split_documents
+======================================================================
+THREAD: Is a bike worth it for a 20 minute walk commute?
+Yeah. Cuts an 18 minute walk to about 6. The thing nobody mentions is storage — covered bike parking exists at three buildings and is full by 9am at all three.
+======================================================================
+Chunk 2  |  source: thread_first_gen.txt#1  |  produced by: chunker.py::split_documents
+======================================================================
+THREAD: Anything specific for first-generation students?
+The thing I'd say: the unwritten rules are the hard part, not the coursework. Ask about the unwritten rules explicitly. People are happy to explain them and nobody volunteers them.
 
-```
-```
+======================================================================
+Chunk 3  |  source: thread_laptop_specs.txt#2  |  produced by: chunker.py::split_documents
+======================================================================
+THREAD: How much laptop do I actually need for CS courses?
+I did two years on an 8GB machine and it was fine until the last project, at which point it very much wasn't. 16 is the answer.
 
-**Chunk 2** — source: `` — produced by: ``
+======================================================================
+Chunk 4  |  source: thread_parking.txt#1  |  produced by: chunker.py::split_documents
+======================================================================
+THREAD: Worth getting a parking permit?
+Street parking on Verrill is legal and free and unmarked, which is why half the upper years do it.
 
-```
-```
 
-**Chunk 3** — source: `` — produced by: ``
-
-```
-```
-
-**Chunk 4** — source: `` — produced by: ``
-
-```
-```
-
-**Chunk 5** — source: `` — produced by: ``
-
-```
-```
+======================================================================
+Chunk 5  |  source: thread_sleep_schedule.txt#1  |  produced by: chunker.py::split_documents
+======================================================================
+THREAD: Everyone says fix your sleep. Does it actually matter?
+The library being open until 2am is a trap. It's a resource, not a schedule.
 
 ## Sample Answer
 
-<!-- One complete question and answer, pasted as text, with the source line
-     visible. Milestone 4. -->
-
 **Question:**
+python app.py ask  "Do transfer credits actually count toward general requierements?"
+  (best distance 0.343, cutoff 0.6)
 
 **Answer:**
+Yes, transfer credits count toward general requirements almost always. 
 
-```
-```
+Source: `thread_transfer_credits.txt`
+
+Sources retrieved: thread_bike_commute.txt, thread_changing_major.txt, thread_pass_fail.txt, thread_textbook_editions.txt, thread_transfer_credits.txt
+
+1 model calls this session, 788 tokens (764 in, 24 out)
+
 
 **My relevance cutoff:**
 
@@ -102,23 +118,34 @@
      Milestone 4. -->
 
 | Question | In corpus? | Best distance |
-|---|---|---|
-|  |  |  |
+|Are there any resources for first-generation students" | Yes | best distance 0.421 |
+
+When is laundry actually free in the dorms?" | Yes 
+ best distance 0.328 |
+
+Do transfer credits actually count toward general requierements | Yes | best distance 0.343
+
+Are there group study rooms available on campus? | Yes | best distance 0.409
+
+Are there free parking spots on campus? | Yes | best distance 0.538
+
+What is the capital of Japan? | No | best distance 0.904
+
+Should I attend this college? | No | best distance 0.636
+
+What is the national animal of Canada? | No | best distance 0.828
+
+"Who won the 1994 World Cup?" | No | best distance 0.787
 
 ## How I Used AI
 
-<!-- Two specific moments. For each: what you asked for, what came back, and
-     what you changed about it.
-
-     "I asked Claude to write the chunking function from my notes. It ignored
-     the overlap, so I added that myself" is the level of detail we're after.
-     "I used AI to help me code" is not.
-
-     Milestone 5. -->
 
 **1.**
+I used Claude to write the chunking function explaining how the documents were organized and the general structure. It was separating the chunks by /n, /s, which was not the case so I reexplained how the documents were formatted.
 
 **2.**
+I asked why the code gernerated replaced
+return fallback_split(documents) for  return chunks 
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never

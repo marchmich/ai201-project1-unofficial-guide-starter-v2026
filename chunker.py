@@ -1,3 +1,4 @@
+import re
 """
 Stage 2 of the pipeline: splitting documents into chunks.
 
@@ -81,23 +82,48 @@ def fallback_split(
 
 
 def split_documents(documents: list[Document]) -> list[Chunk]:
+    import re
+
+# Matches separators like "--- reply 1 (26 votes) ---"
+_REPLY_MARKER = re.compile(r"-{2,}\s*reply\s+\d+\s*\(\d+\s*votes?\)\s*-{2,}", re.IGNORECASE)
+
+
+def split_documents(documents: list[Document]) -> list[Chunk]:
     """
-    Split documents into chunks. ⚠️ REPLACE THE BODY OF THIS IN MILESTONE 3.
+    Split thread documents into one chunk per reply.
 
-    Right now it just calls the fallback. That is the plain, generic behaviour
-    the brief is talking about.
-
-    When you write your own strategy, set `produced_by` to
-    "chunker.py::split_documents" so your README's Sample Chunks section names
-    the right function. `app.py chunks` prints that string for you.
-
-    Things worth thinking about before you write any code:
-      - Are your documents short posts or long guides?
-      - Is the useful information in one sentence, or spread over a paragraph?
-      - Would splitting on paragraph breaks keep more thoughts intact than
-        splitting on a character count?
+    These posts are short threads: a title/question followed by
+    "--- reply N (votes) ---" blocks, each holding one self-contained
+    answer (~88 characters, one sentence). A reply is the natural unit
+    here, not a character count or a paragraph break -- splitting any
+    other way either merges unrelated replies or cuts one mid-sentence.
+    The title is prepended to each reply chunk because a reply like
+    "Yes, but stack your courses" is meaningless without the question
+    it's answering.
     """
-    return fallback_split(documents)
+    chunks: list[Chunk] = []
+    for doc in documents:
+        segments = _REPLY_MARKER.split(doc.text)
+        title = segments[0].strip()
+        replies = [s.strip() for s in segments[1:] if s.strip()]
+
+        if not replies:
+            # Not a thread in this format -- fall back rather than drop it.
+            chunks.extend(fallback_split([doc]))
+            continue
+
+        for index, reply in enumerate(replies):
+            text = f"{title}\n{reply}" if title else reply
+            chunks.append(
+                Chunk(
+                    text=text,
+                    source=doc.source,
+                    index=index,
+                    produced_by="chunker.py::split_documents",
+                )
+            )
+
+    return chunks
 
 
 def describe(chunks: list[Chunk]) -> str:
