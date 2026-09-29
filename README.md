@@ -1,19 +1,6 @@
 # The Unofficial Guide
 
-Michelle Marchesini, i chose advice thread
-
-> **This file is your submission.** Fill it in as you go — most sections get
-> written during the milestone that produces them, not at the end.
->
-> How the starter works, and every command you'll need, is in `RUNNING.md`.
-> Leave that file alone.
->
-> **Paste everything as text.** No screenshots, no video. A typed table gets
-> full credit; a picture of the same table gets none.
->
-> Delete these instruction blocks as you replace them. The `<!-- -->` comments
-> are notes to you and don't show up when the page renders — you can leave them
-> or remove them.
+Michelle Marchesini, I chose the advice thread, which is a series of documents that contain students' answers to common questions about dorm/college life.
 
 ---
 
@@ -21,7 +8,7 @@ Michelle Marchesini, i chose advice thread
 
 ## What This Does
 
-I chose the advice threads corpus and I asked questions about college/dorm life that freshman specially, would ask. The system reads through the threads and provides an answer to the question.
+I chose the advice threads corpus, and I asked questions about college/dorm life that freshmen would ask. The system reads through the threads and provides an answer to the question.
 
 
 ## Chunking Strategy
@@ -29,14 +16,11 @@ I chose the advice threads corpus and I asked questions about college/dorm life 
 **Chunk size:** N/A — chunks are variable-length, one per forum reply (not a fixed character/token count)
 **Overlap:** None — replies are disjoint by construction, so overlap would just duplicate whole replies rather than smoothing a cut
 
-Reading the documents in advice_thread, the fixed-size character window from
-`fallback_split` (chunk_size=800-ish, with overlap) was clearly wrong for
-this corpus because these aren't long texts, they're short forum threads averaging
-~88 characters per reply, structured as a title followed by
-`--- reply N (votes) ---` blocks. A fixed window either swallowed 5-10
-replies into one chunk (losing the one-sentence-per-idea structure) or, on
-a bigger document, cut a reply in half mid-sentence and produced a
-meaningless fragment paired arbitrarily with the tail of the next one.
+Reading the documents in the advice_thread, the fixed-size character window from `fallback_split` (chunk_size=800-ish, with overlap) was
+clearly wrong for this corpus because these aren't long texts, they're short forum threads, averaging ~88 characters per reply, structured
+as a title followed by `--- reply N (votes) ---` blocks. A fixed window either swallowed 5-10replies into one chunk (losing the one
+sentence-per-idea structure) or, on a bigger document, cut a reply in half mid-sentence and produce a meaningless fragment paired
+arbitrarily with the tail of the next one.
 
 The natural unit here is the reply itself, not a byte count: each reply is
 already a single, self-contained answer, and the `--- reply N (votes) ---`
@@ -51,45 +35,39 @@ text) without adding safety.
 
 ## Sample Chunks
 
-<!-- Five chunks, pasted as text. Label each one and name the file it came from
-     AND the function that produced it — the grader checks your code against
-     what you claim here.
-
-     `python app.py chunks -n 5` prints all three for you. Copy them straight
-     across.
-
-     Milestone 3. -->
-
-======================================================================
+---
 Chunk 1  |  source: thread_bike_commute.txt#0  |  produced by: chunker.py::split_documents
-======================================================================
+
 THREAD: Is a bike worth it for a 20 minute walk commute?
 Yeah. Cuts an 18 minute walk to about 6. The thing nobody mentions is storage — covered bike parking exists at three buildings and is full by 9am at all three.
-======================================================================
+
+---
+
 Chunk 2  |  source: thread_first_gen.txt#1  |  produced by: chunker.py::split_documents
-======================================================================
+
 THREAD: Anything specific for first-generation students?
 The thing I'd say: the unwritten rules are the hard part, not the coursework. Ask about the unwritten rules explicitly. People are happy to explain them and nobody volunteers them.
 
-======================================================================
+---
+
 Chunk 3  |  source: thread_laptop_specs.txt#2  |  produced by: chunker.py::split_documents
-======================================================================
+
 THREAD: How much laptop do I actually need for CS courses?
 I did two years on an 8GB machine and it was fine until the last project, at which point it very much wasn't. 16 is the answer.
 
-======================================================================
+---
 Chunk 4  |  source: thread_parking.txt#1  |  produced by: chunker.py::split_documents
-======================================================================
+
 THREAD: Worth getting a parking permit?
 Street parking on Verrill is legal and free and unmarked, which is why half the upper years do it.
 
-
-======================================================================
+---
 Chunk 5  |  source: thread_sleep_schedule.txt#1  |  produced by: chunker.py::split_documents
-======================================================================
+
 THREAD: Everyone says fix your sleep. Does it actually matter?
 The library being open until 2am is a trap. It's a resource, not a schedule.
 
+---
 ## Sample Answer
 
 **Question:**
@@ -108,34 +86,20 @@ Sources retrieved: thread_bike_commute.txt, thread_changing_major.txt, thread_pa
 
 **My relevance cutoff:**
 
-<!-- The number you set in config.py, and how you got there.
 
-     You ran five questions your corpus covers and the five in OUT_OF_SCOPE
-     that it clearly doesn't, and wrote down the best distance for each. What
-     did those two groups look like? Where was the gap? Put the actual numbers
-     here — the table below wants all ten rows.
 
-     Milestone 4. -->
 
-| Question | In corpus? | Best distance |
-|Are there any resources for first-generation students" | Yes | best distance 0.421 |
-
-When is laundry actually free in the dorms?" | Yes 
- best distance 0.328 |
-
-Do transfer credits actually count toward general requierements | Yes | best distance 0.343
-
-Are there group study rooms available on campus? | Yes | best distance 0.409
-
-Are there free parking spots on campus? | Yes | best distance 0.538
-
-What is the capital of Japan? | No | best distance 0.904
-
-Should I attend this college? | No | best distance 0.636
-
-What is the national animal of Canada? | No | best distance 0.828
-
-"Who won the 1994 World Cup?" | No | best distance 0.787
+| Question  | In corpus? | Best distance |
+|---|---|---|
+|Are there any resources for first-generation students?" | Yes | 0.421 |
+|When is laundry actually free in the dorms?" | Yes|  0.328 |
+|Do transfer credits actually count toward general requierements | Yes | 0.343|
+|Are there group study rooms available on campus? | Yes | 0.409|
+|Are there free parking spots on campus? | Yes | 0.538|
+|What is the capital of Japan? | No | 0.904|
+|Should I attend this college? | No | 0.636|
+|What is the national animal of Canada? | No | 0.828|
+|"Who won the 1994 World Cup?" | No | 0.787|
 
 ## How I Used AI
 
