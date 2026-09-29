@@ -160,7 +160,7 @@ Yes, the library has group study rooms that can be booked by one person and used
 |---|---|---|---|
 | 1 | Retrieved chunk contains the answer |  MET |  All my responses contained an answer to my question|
 | 2 |  Every answer names a source  | MET | Every answer contained the source file from where it obtained the information |
-| 3 | Gate stops out-of-corpus questions |  All the out-of-corpus questions were refused at the gate | MET  |
+| 3 | Gate stops out-of-corpus questions | MET  | All the out-of-corpus questions were refused at the gate  |
 | 4 | All chunks contain a concrete answer, and an explanation. | MISSED | Answers to question 1 did not include "Yes,..." in the response. |
 | 5 | The answer clearly states whether the answer is a fact or a student's opinion. | MISSED | None of the questions answered if this was a students opinion's or facts. |
 
