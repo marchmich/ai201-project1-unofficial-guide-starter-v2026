@@ -120,10 +120,6 @@ return fallback_split(documents) for  return chunks
 
 # Unit 2
 
-<!-- These sections get ADDED to what's already above. Don't delete or rewrite
-     unit 1 — the point is that someone can see what you said before you knew
-     how it went. -->
-
 ## Run Log — Before
 
 <!-- Your five criteria, three runs each. `python run_eval.py --label before`
@@ -141,8 +137,8 @@ return fallback_split(documents) for  return chunks
 | 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
 | 2. Every answer names a source | 5 of 5 |  |  |  |  |
 | 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 4. All chunks contain a concrete answer, and an explanation. | | | | | |
+| 5. The answer clearly states whether the answer is a fact or a student's opinion. | | | | | |
 
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
@@ -206,8 +202,8 @@ return fallback_split(documents) for  return chunks
 | 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
 | 2. Every answer names a source | 5 of 5 |  |  |  |  |
 | 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 4. All chunks contain a concrete answer, and an explanation. | | | | | |
+| 5. The answer clearly states whether the answer is a fact or a student's opinion. | | | | | |
 
 **Did it help?**
 
