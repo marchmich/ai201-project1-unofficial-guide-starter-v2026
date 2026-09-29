@@ -279,7 +279,8 @@ Rules:
 - Use only the information in the documents below. Do not use anything you know from elsewhere.
 - If the documents don't cover the question, say you don't have enough information. Do not guess.
 - Name the document your answer came from, using the filename given in each excerpt.
-- Be brief. Two or three sentences is usually enough."""
+- Be brief. Two or three sentences is usually enough.
+- When the information is a student's opinion and not a fact, clearly state that it is a student's opinion."""
 
 
 def build_prompt(question: str, results) -> str:

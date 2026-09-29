@@ -156,15 +156,6 @@ Yes, the library has group study rooms that can be booked by one person and used
 
 ## Verdicts
 
-<!-- MET or MISSED for each of the five, against the target you wrote last
-     unit — not a new one. Plus a sentence on how you decided. That sentence
-     matters most where it was close.
-
-     If your target said 4 of 5 and your runs came out 4, 3, 4, that's a MISS.
-     The target has to hold, not show up occasionally.
-
-     Milestone 2. -->
-
 | # | Criterion | Verdict | How I decided |
 |---|---|---|---|
 | 1 | Retrieved chunk contains the answer |  MET |  All my responses contained an answer to my question|
@@ -182,16 +173,13 @@ Criteron 5 missed because the answers don't state whether it is a fact or an opi
 ## The Improvement
 
 **What I changed:**
+I added a grounding instruction to fix criteron 5. At first, I added "Clearly state when the information is an opinion or an opinion", but I realized this was changing all my answers in a way that I did not want so I edited to "When the information is a student's opinion and not a fact, clearly state that it is a student's opinion."
 
 **Why I picked it:**
 
-<!-- Connect it to a specific diagnosis above in one sentence. If you can't,
-     you picked a fix because it sounded impressive. -->
+I picked to add another grounding instruction because this would fix the problem since the issue was in the generation stage.
 
 ### Run Log — After
-
-<!-- Same format, same five criteria, three runs each.
-     `python run_eval.py --label after` -->
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
