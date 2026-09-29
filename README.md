@@ -183,34 +183,20 @@ I picked to add another grounding instruction because this would fix the problem
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. All chunks contain a concrete answer, and an explanation. | | | | | |
-| 5. The answer clearly states whether the answer is a fact or a student's opinion. | | | | | |
+| 1. Retrieved chunk contains the answer | 4 of 5 | 5/5 | 5/5  | 5/5 | PASS |
+| 2. Every answer names a source | 5 of 5 |  5/5 | 5/5  | 5/5 | PASS |
+| 3. Gate stops out-of-corpus questions | 4 of 5 |  5/5 | 5/5  | 5/5 | PASS |
+| 4. All chunks contain a concrete answer, and an explanation. | 4/5 | 2/5 | 4/5 | 3/5 | MISSED |
+| 5. The answer clearly states whether the answer is a fact or a student's opinion. | 5/5 | 0/5 | 0/5| 0/5  | MISSED |
 
 **Did it help?**
 
-<!-- Say plainly whether it did, and how you know. If it made things worse,
-     say that — a change that backfired, honestly reported, earns full credit
-     and is more interesting than one that worked. What matters is that you can
-     tell.
-
-     Milestone 4. -->
+It helped for criteron 4, even though the changes were intended for criteron 5. However, this made me realize that the criteron 5 could have been written differently, or the questions could have been more specific. Criteron 4 improved, and now more questions start with "Yes,...". 
 
 ## What's Still Broken
 
-<!-- For each criterion still missed after your fix: what you'd do about it,
-     and why you stopped where you did.
-
-     "I ran out of time" is fine if it's true. Pretending nothing is left is
-     not.
-
-     Milestone 5. -->
+Criteron 5 is still broken. I need to rewrite it to be able to holistically evaluate my model and understand what's not working. Additionally, I could also enhance my questions so that my model can answer whether this is student advice or a fact.
 
 ## What I'd Do Differently
 
-<!-- Knowing what you know now — which of your five criteria would you write
-     differently, and why?
-
-     Milestone 5. -->
+I would formulate my questions better and re-edit the grounding instructions to fit my criteria specifically.
