@@ -175,23 +175,9 @@ Yes, the library has group study rooms that can be booked by one person and used
 
 ## Diagnoses
 
-<!-- For each miss: which stage caused it, and how. The stage alone isn't
-     enough — you need the mechanism.
+Criteron 4 missed because the answers to question 1 did not explicitly include "yes". I believe the mistake is in the generation-stage because maybe the answer doesn't explicitly say "Yes" so when the LLM paraphrases it, it does not include the concrete wording I am looking for.
 
-     Not a diagnosis: "Question 3 didn't work."
-     A diagnosis:     "Question 3 asks about laundry costs. The answer is in
-                       one sentence that got split across two chunks, so
-                       neither chunk on its own contains it."
-
-     The five stages: loading → chunking → embedding → retrieval → generation.
-
-     Look for a pattern. If three misses all ask about numbers, that's one
-     problem, not three.
-
-     Missed nothing? Say so, then say honestly whether your targets were set
-     low, and which one you'd tighten and to what.
-
-     Milestone 3. -->
+Criteron 5 missed because the answers don't state whether it is a fact or an opinion. I believe the mistake is in the generation stage because the generation prompt does not explicitly ask for it.
 
 ## The Improvement
 
