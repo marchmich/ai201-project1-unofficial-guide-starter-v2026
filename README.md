@@ -137,7 +137,7 @@ return fallback_split(documents) for  return chunks
 | 1. Retrieved chunk contains the answer | 4 of 5 | 5/5  | 5/5  | 5/5 | MET |
 | 2. Every answer names a source | 5 of 5 | 5/5 | 5/5 |  5/5 | MET |
 | 3. Gate stops out-of-corpus questions | 4 of 5 |  5/5 | 5/5  | 5/5  | MET |
-| 4. All chunks contain a concrete answer, and an explanation. | | 4/5  | 4/5 | 4/5 | MET |
+| 4. All chunks contain a concrete answer, and an explanation. | 4/5 | 3/5  | 3/5 | 3/5 | MISSED |
 | 5. The answer clearly states whether the answer is a fact or a student's opinion. | 5/5 | 0/5 | 0/5| 0/5  | MISSED |
 
 Street parking on Verrill is legal, free, and unmarked. 
@@ -167,11 +167,11 @@ Yes, the library has group study rooms that can be booked by one person and used
 
 | # | Criterion | Verdict | How I decided |
 |---|---|---|---|
-| 1 |  |  |  |
-| 2 |  |  |  |
-| 3 |  |  |  |
-| 4 |  |  |  |
-| 5 |  |  |  |
+| 1 | Retrieved chunk contains the answer |  MET |  All my responses contained an answer to my question|
+| 2 |  Every answer names a source  | MET | Every answer contained the source file from where it obtained the information |
+| 3 | Gate stops out-of-corpus questions |  All the out-of-corpus questions were refused at the gate | MET  |
+| 4 | All chunks contain a concrete answer, and an explanation. | MISSED | Answers to question 1 did not include "Yes,..." in the response. |
+| 5 | The answer clearly states whether the answer is a fact or a student's opinion. | MISSED | None of the questions answered if this was a students opinion's or facts. |
 
 ## Diagnoses
 
