@@ -111,3 +111,11 @@ It is important that the answer is accurate and the user understand if this is a
      The whole reason the originals stay visible is so someone can see what you
      said before you knew the answer.
      ───────────────────────────────────────────────────────────────────────── -->
+## CAPSTONE
+### The System:
+RAG week 1-2
+
+### The Shape:
+For this unit, I will be taking the RAG system built in week 1 and 2 and put it online so it runs on its own with loggings and measurement around it. 
+
+ ### What's out of scope:

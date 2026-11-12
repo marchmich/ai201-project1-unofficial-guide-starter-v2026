@@ -200,3 +200,10 @@ Criteron 5 is still broken. I need to rewrite it to be able to holistically eval
 ## What I'd Do Differently
 
 I would formulate my questions better and re-edit the grounding instructions to fit my criteria specifically.
+
+### Capstone
+
+## The Shape
+Shape A: I will be deploying the RAG system so that it runs on its own, with logging and measurement around it. I am adding a structured JSON file that logs each query and includes timestamp, input(question), output(answer), retrieval time, generation time, chunk count, error, tokens, and measured cost per run. 
+
+Out of scope: I am not building a dashboard, or changing any parameter of my system. I am not adding any features, changing or modifying chunking or retrieval.
