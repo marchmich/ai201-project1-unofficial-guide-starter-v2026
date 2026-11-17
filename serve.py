@@ -27,9 +27,11 @@ Shipping a logger here would hand you the answer to that. Add yours in unit 9;
 this file stays the bare shell until then.
 """
 
+import logging  # CHANGED: standard Python logging, not flask.logging
 import os
+import time
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request  # CHANGED: removed `logging` from here
 
 import config
 
@@ -71,6 +73,15 @@ def ask():
     system working — it is an answer, and the JSON says so with
     `"refused": true` so whatever calls this can tell the two apart.
     """
+
+    logging.basicConfig(
+    filename="app_records.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+    )
+    
+    start_time = time.perf_counter()
+
     from app import ask_pipeline
 
     payload = request.get_json(silent=True) or {}
@@ -92,6 +103,10 @@ def ask():
     except Exception as exc:  # noqa: BLE001 — a reader gets this, not a traceback
         return jsonify({"error": f"{type(exc).__name__}: {exc}"}), 500
 
+    end_time = time.perf_counter()
+    elapsed_time = end_time - start_time
+    logging.info(f"Task completed in {elapsed_time:.4f} seconds")
+
     return jsonify(
         {
             "question": question,
@@ -103,6 +118,12 @@ def ask():
             "corpus": config.CORPUS,
         }
     )
+
+
+    
+
+
+
 
 
 def main():
