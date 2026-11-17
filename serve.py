@@ -88,6 +88,7 @@ def ask():
     question = (payload.get("question") or "").strip()
 
     if not question:
+        logging.error(f"Rejected (400): empty question, after {time.perf_counter() - start_time:.4f} seconds")
         return (
             jsonify(
                 {
@@ -101,6 +102,7 @@ def ask():
     try:
         outcome = ask_pipeline(question, corpus=config.CORPUS)
     except Exception as exc:  # noqa: BLE001 — a reader gets this, not a traceback
+        logging.error(f"Failed (500): {type(exc).__name__}: {exc}, after {time.perf_counter() - start_time:.4f} seconds")
         return jsonify({"error": f"{type(exc).__name__}: {exc}"}), 500
 
     end_time = time.perf_counter()
