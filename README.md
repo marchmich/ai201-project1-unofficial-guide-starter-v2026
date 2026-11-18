@@ -228,3 +228,12 @@ Out of scope: I am not building a dashboard, or changing any parameter of my sys
 2026-11-17 13:42:17,802 - INFO - Task completed in 2.2998 seconds
 2026-11-18 13:16:00,066 - INFO - Task completed in 2.4503 seconds
 2026-11-17 13:37:24,423 - INFO - Task completed in 0.1848 seconds
+
+# Run Log - Before
+| Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
+|---|---|---|---|---|---|
+| 1. | Every log gets recorded | 5/5 | 5/5 | 5/5 | PASS |
+| 2. | The requests takes less than 5s.| 4/5 | 4/5 | 5/5 | 4/5 | PASS |
+| 3. | When the question is refused, the log records an error.| 2/5 | 1/5 | 0/5 | MISSED |
+| 4. | When the question is empty, the log records an error. | 5/5 | 0/5 | 5/5 | MISSED | #if there is only a question mark, it won't mark it as empty
+| 5. | The system works everytime a question inside the corpora is asked. | 4/5 | 4/5 | 4/5 | MET |

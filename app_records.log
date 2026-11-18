@@ -36,3 +36,29 @@
 2026-11-18 17:20:22,251 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent "HTTP/1.1 200 OK"
 2026-11-18 17:20:22,261 - INFO - Task completed in 1.2398 seconds
 2026-11-18 17:20:22,262 - INFO - 127.0.0.1 - - [18/Nov/2026 17:20:22] "POST /ask HTTP/1.1" 200 -
+2026-11-18 17:42:49,832 - INFO - Task completed in 1.8676 seconds
+2026-11-18 17:42:49,837 - INFO - 127.0.0.1 - - [18/Nov/2026 17:42:49] "POST /ask HTTP/1.1" 200 -
+2026-11-18 17:43:21,431 - INFO - Task completed in 0.2473 seconds
+2026-11-18 17:43:21,432 - INFO - 127.0.0.1 - - [18/Nov/2026 17:43:21] "POST /ask HTTP/1.1" 200 -
+2026-11-18 17:43:52,654 - INFO - Task completed in 0.2978 seconds
+2026-11-18 17:43:52,655 - INFO - 127.0.0.1 - - [18/Nov/2026 17:43:52] "POST /ask HTTP/1.1" 200 -
+2026-11-18 17:44:34,560 - INFO - Task completed in 0.1767 seconds
+2026-11-18 17:44:34,561 - INFO - 127.0.0.1 - - [18/Nov/2026 17:44:34] "POST /ask HTTP/1.1" 200 -
+2026-11-18 17:44:48,217 - INFO - Task completed in 0.1015 seconds
+2026-11-18 17:44:48,217 - INFO - 127.0.0.1 - - [18/Nov/2026 17:44:48] "POST /ask HTTP/1.1" 200 -
+2026-11-18 17:45:17,490 - ERROR - Rejected (400): empty question, after 0.0003 seconds
+2026-11-18 17:45:17,491 - INFO - 127.0.0.1 - - [18/Nov/2026 17:45:17] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2026-11-18 17:46:11,203 - INFO - AFC is enabled with max remote calls: 10.
+2026-11-18 17:46:12,048 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-11-18 17:46:12,060 - INFO - Task completed in 1.1241 seconds
+2026-11-18 17:46:12,060 - INFO - 127.0.0.1 - - [18/Nov/2026 17:46:12] "POST /ask HTTP/1.1" 200 -
+2026-11-18 17:46:28,021 - INFO - AFC is enabled with max remote calls: 10.
+2026-11-18 17:46:28,853 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-11-18 17:46:28,857 - INFO - Task completed in 1.0398 seconds
+2026-11-18 17:46:28,858 - INFO - 127.0.0.1 - - [18/Nov/2026 17:46:28] "POST /ask HTTP/1.1" 200 -
+2026-11-18 17:46:54,936 - INFO - Task completed in 0.1996 seconds
+2026-11-18 17:46:54,937 - INFO - 127.0.0.1 - - [18/Nov/2026 17:46:54] "POST /ask HTTP/1.1" 200 -
+2026-11-18 17:47:14,738 - INFO - AFC is enabled with max remote calls: 10.
+2026-11-18 17:47:15,705 - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent "HTTP/1.1 200 OK"
+2026-11-18 17:47:15,712 - INFO - Task completed in 1.1693 seconds
+2026-11-18 17:47:15,713 - INFO - 127.0.0.1 - - [18/Nov/2026 17:47:15] "POST /ask HTTP/1.1" 200 -
