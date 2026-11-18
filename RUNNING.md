@@ -255,3 +255,26 @@ units.
 
 `results/` is deliberately **not** in `.gitignore`. Your run logs are evidence
 that the test actually happened, and they're part of what gets graded.
+
+
+## Unit 9
+To run this locally, on port 5000. You must run the following commands:
+
+```
+bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env          # then paste your key into .env
+python test.py
+```
+
+then, you run 
+``` python serve.py```
+which will start running the program locally on host 5000. On a different terminal, now you run
+
+```
+curl -X POST http://localhost:5000/ask \
+    -H 'Content-Type: application/json' \
+    -d '{"question": "Your Question Here?"}'
+```
