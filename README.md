@@ -207,3 +207,24 @@ I would formulate my questions better and re-edit the grounding instructions to 
 Shape A: I will be deploying the RAG system so that it runs on its own, with logging and measurement around it. I am adding a structured JSON file that logs each query and includes timestamp, input(question), output(answer), retrieval time, generation time, chunk count, error, tokens, and measured cost per run. 
 
 Out of scope: I am not building a dashboard, or changing any parameter of my system. I am not adding any features, changing or modifying chunking or retrieval.
+
+## Instrumentation
+
+2026-11-17 13:30:01,632 - INFO - 127.0.0.1 - - [17/Nov/2026 13:30:01] "POST /ask HTTP/1.1" 200 -
+2026-11-17 13:36:52,014 - INFO - 127.0.0.1 - - [17/Nov/2026 13:36:52] "POST /ask HTTP/1.1" 200 -
+2026-11-17 13:37:10,788 - INFO - 127.0.0.1 - - [17/Nov/2026 13:37:10] "POST /ask HTTP/1.1" 200 -
+2026-11-17 13:37:24,423 - INFO - 127.0.0.1 - - [17/Nov/2026 13:37:24] "POST /ask HTTP/1.1" 200 -
+2026-11-17 13:37:52,353 - INFO - 127.0.0.1 - - [17/Nov/2026 13:37:52] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2026-11-17 13:38:19,511 - INFO - 127.0.0.1 - - [17/Nov/2026 13:38:19] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2026-11-17 13:40:51,857 - ERROR - Rejected (400): empty question, after 0.0012 seconds
+2026-11-17 13:40:51,858 - INFO - 127.0.0.1 - - [17/Nov/2026 13:40:51] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2026-11-17 13:42:17,803 - INFO - 127.0.0.1 - - [17/Nov/2026 13:42:17] "POST /ask HTTP/1.1" 200 -
+2026-11-18 13:16:00,070 - INFO - 127.0.0.1 - - [18/Nov/2026 13:16:00] "POST /ask HTTP/1.1" 200 -
+
+## What It Cost
+2026-11-17 13:30:01,631 - INFO - Task completed in 2.2910 seconds
+2026-11-17 13:36:52,013 - INFO - Task completed in 0.5179 seconds
+2026-11-17 13:37:10,787 - INFO - Task completed in 0.1837 seconds
+2026-11-17 13:42:17,802 - INFO - Task completed in 2.2998 seconds
+2026-11-18 13:16:00,066 - INFO - Task completed in 2.4503 seconds
+2026-11-17 13:37:24,423 - INFO - Task completed in 0.1848 seconds
