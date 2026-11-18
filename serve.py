@@ -36,6 +36,7 @@ from flask import Flask, jsonify, request  # CHANGED: removed `logging` from her
 import config
 
 app = Flask(__name__)
+app.json.compact = False
 
 
 @app.get("/health")
@@ -118,6 +119,7 @@ def ask():
             "best_distance": round(outcome["best_distance"], 4),
             "threshold": outcome["threshold"],
             "corpus": config.CORPUS,
+            "elapsed_time": round(elapsed_time, 4),
         }
     )
 

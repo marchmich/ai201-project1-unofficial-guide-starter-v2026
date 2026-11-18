@@ -116,6 +116,27 @@ It is important that the answer is accurate and the user understand if this is a
 RAG week 1-2
 
 ### The Shape:
-For this unit, I will be taking the RAG system built in week 1 and 2 and put it online so it runs on its own with loggings and measurement around it. 
+For this unit, I will be taking the RAG system built in week 1 and 2 and put it online so it runs on its own with loggings and measurement around it. I will be adding time elapsed to measure how long does it take, the distance, and whether the question was refused or not.
 
  ### What's out of scope:
+I won't be adding any other features or components.
+
+# Criteria 
+
+## 1. Every log gets recorded 
+For 5/5 requests, a log is recorded, with the gate, time, and time it took for the answer to be generated.
+
+## 2. The requests takes less than 5s.
+For at least 4/5 questions, the systems responds in less than 5 seconds.
+
+## 3. When the question is refused, the log records an error.
+For 5/5 requests refused, a log is created explaining that it was rejected.
+
+## 3. When the question is empty, the log records an error.
+For 5/5 requests refused, a log is created explaining that the request was empty.
+
+## 4. The system works everytime a question inside the corpora is asked.
+For 4/5 requests asked about things inside the corpora, the system is able to answer.
+
+
+
