@@ -136,7 +136,7 @@ For 5/5 requests refused, a log is created explaining that it was rejected.
 For 5/5 requests refused, a log is created explaining that the request was empty.
 
 ## 4. The system works everytime a question inside the corpora is asked.
-For 4/5 requests asked about things inside the corpora, the system is able to answer.
+For 4/5 questions of topics in the corpora, the system is able to answer.
 
 
 
