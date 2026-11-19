@@ -64,3 +64,11 @@
 2026-11-18 17:47:15,713 - INFO - 127.0.0.1 - - [18/Nov/2026 17:47:15] "POST /ask HTTP/1.1" 200 -
 2026-11-19 13:25:08,639 - INFO - Task completed in 2.4788 seconds
 2026-11-19 13:25:08,640 - INFO - 127.0.0.1 - - [19/Nov/2026 13:25:08] "POST /ask HTTP/1.1" 200 -
+2026-11-19 14:42:54,182 - INFO - Task completed in 2.6033 seconds
+2026-11-19 14:42:54,182 - INFO - 127.0.0.1 - - [19/Nov/2026 14:42:54] "POST /ask HTTP/1.1" 200 -
+2026-11-19 14:44:54,193 - INFO - Task completed in 0.3295 seconds
+2026-11-19 14:44:54,194 - INFO - 127.0.0.1 - - [19/Nov/2026 14:44:54] "POST /ask HTTP/1.1" 200 -
+2026-11-19 14:46:26,674 - ERROR - Rejected (400): empty question, after 0.0010 seconds
+2026-11-19 14:46:26,675 - INFO - 127.0.0.1 - - [19/Nov/2026 14:46:26] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+2026-11-19 14:47:21,336 - INFO - Task completed in 0.3756 seconds
+2026-11-19 14:47:21,337 - INFO - 127.0.0.1 - - [19/Nov/2026 14:47:21] "POST /ask HTTP/1.1" 200 -

@@ -272,22 +272,78 @@ compute per day (18 s to 4 min across the observed range).
 | 5. | The system works everytime a question inside the corpora is asked. | 4/5 | 4/5 | 4/5 | MET |
 
 ## Output
+1. 
+     ``` curl -X POST http://localhost:5000/ask \
+     -H 'Content-Type: application/json' \
+     -d '{"question": "What is the weather?"}' 
 
-''' curl -X POST http://localhost:5000/ask \
-    -H 'Content-Type: application/json' \
-    -d '{"question": "?"}'
-    '''
-    
+     "answer": "I don't have enough information about that.",
+     "best_distance": 0.8546,
+     "corpus": "advice_threads",
+     "elapsed_time": 2.4788,
+     "question": "?",
+     "refused": true,
+     "sources": [],
+     "threshold": 0.5 ```
+
+     2026-11-19 13:25:08,639 - INFO - Task completed in 2.4788 seconds //
+     2026-11-19 13:25:08,640 - INFO - 127.0.0.1 - - [19/Nov/2026 13:25:08] "POST /ask HTTP/1.1" 200 -
+
+2. 
+All request took less than 5s 
+```
+2026-11-17 13:30:01,631 - INFO - Task completed in 2.2910 seconds
+2026-11-17 13:36:52,013 - INFO - Task completed in 0.5179 seconds
+2026-11-17 13:37:10,787 - INFO - Task completed in 0.1837 seconds
+2026-11-17 13:42:17,802 - INFO - Task completed in 2.2998 seconds
+2026-11-18 13:16:00,066 - INFO - Task completed in 2.4503 seconds
+2026-11-17 13:37:24,423 - INFO - Task completed in 0.1848 seconds
+```
+3. 
+
+     ```-H 'Content-Type: application/json' \
+     -d '{"question": "What is the capital of Italy?"}'
+     {
+     "answer": "I don't have enough information about that.",
+     "best_distance": 0.8835,
+     "corpus": "advice_threads",
+     "elapsed_time": 0.3295,
+     "question": "What is the capital of Italy?",
+     "refused": true,
+     "sources": [],
+     "threshold": 0.5
+     }
+
+     Not recorded as an error
+     2026-11-19 14:44:54,193 - INFO - Task completed in 0.3295 seconds
+     2026-11-19 14:44:54,194 - INFO - 127.0.0.1 - - [19/Nov/2026 14:44:54] "POST /ask HTTP/1.1" 200 -
+     ```
+4. ``` 
+     -H 'Content-Type: application/json' \
+     -d '{"question": ""}'                             
+     {
+     "error": "Send JSON with a question in it, like {\"question\": \"is the housing lottery random?\"}"
+     }
+
+     2026-11-19 14:46:26,674 - ERROR - Rejected (400): empty question, after 0.0010 seconds
+     2026-11-19 14:46:26,675 - INFO - 127.0.0.1 - - [19/Nov/2026 14:46:26] "[31m[1mPOST /ask HTTP/1.1[0m" 400 -
+```
+
+5. 
+```
+ -H 'Content-Type: application/json' \
+    -d '{"question": "should i sleep?"}'
 {
   "answer": "I don't have enough information about that.",
-  "best_distance": 0.8546,
+  "best_distance": 0.5058,
   "corpus": "advice_threads",
-  "elapsed_time": 2.4788,
-  "question": "?",
+  "elapsed_time": 0.3756,
+  "question": "should i sleep?",
   "refused": true,
   "sources": [],
   "threshold": 0.5
 }
+```
 
 ## The Improvement
 
