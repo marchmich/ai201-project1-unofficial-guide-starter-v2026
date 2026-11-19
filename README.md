@@ -364,6 +364,13 @@ For 5/5 empty requests, a log entry is created explaining that no question was p
 
 ## The Improvement
 
+I have edited criterion 3 so a refused question does not get labeled as an error.
+For criterion 4, I have made edits to serve.py so that "?" is considered an empty question.
+
 ## What's Still Broken 
 
+I still haven't added a token count.
+
 ## How I Used AI
+
+I used AI to review my criteria, and assist in the creation of the logging file. 
