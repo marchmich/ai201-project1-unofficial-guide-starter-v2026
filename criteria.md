@@ -126,17 +126,24 @@ I won't be adding any other features or components.
 ## 1. Every log gets recorded 
 For 5/5 requests, a log is recorded, with the gate, time, and time it took for the answer to be generated.
 
+**Why this target:** Logging is deterministic code with no model judgment involved, so there is no reason to accept a miss. A single unlogged request means the cost and gate numbers can't be trusted, and the log is the evidence for every other criterion. Five of five is the only target that keeps the rest of the evaluation verifiable.
+
 ## 2. The requests takes less than 5s.
 For at least 4/5 questions, the systems responds in less than 5 seconds.
+
+**Why this target:** Five seconds is the point where a user starts to wonder whether the system is working. The measured runs ranged from 0.18 s to 2.45 s, so 5 s leaves headroom for slower runs, cold starts, or network variance. I allow one miss in five instead of requiring all five because response time depends on things outside my control, such as API latency, and a single slow outlier shouldn't fail the whole system.
 
 ## 3. When the question is refused, the log records an error.
 For 5/5 requests refused, a log is created explaining that it was rejected.
 
-## 3. When the question is empty, the log records an error.
+**Why this target:** A refusal that leaves no trace is indistinguishable from a crash or a dropped request. The log is the only way to audit what the gate blocked and why. Like criterion 1, this is plain control flow, so it should work every time, and a single silent refusal would mean the gate can't be audited.
+
+## 4. When the question is empty, the log records an error.
 For 5/5 requests refused, a log is created explaining that the request was empty.
 
-## 4. The system works everytime a question inside the corpora is asked.
+**Why this target:** Empty input is the simplest edge case to detect, and it usually signals a bug upstream (a broken form, a failed pipeline step). Logging it with a clear reason makes those bugs easy to find. Because the check is a simple condition, there is no reason to tolerate a miss.
+
+## 5. The system works everytime a question inside the corpora is asked.
 For 4/5 questions of topics in the corpora, the system is able to answer.
 
-
-
+**Why this target:** Unlike the logging criteria, answering depends on retrieval and model behavior, which are probabilistic. Requiring 5/5 would make the target brittle, since one ambiguous phrasing could fail it. Four of five (80%) shows the system handles in-scope questions reliably while admitting that wording and retrieval quality vary. Failures at this level are worth investigating but not a sign the system is broken.
