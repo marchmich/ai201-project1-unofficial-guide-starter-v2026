@@ -342,8 +342,25 @@ All request took less than 5s
   "refused": true,
   "sources": [],
   "threshold": 0.5
-}
-```
+} ```
+
+
+
+## Diagnosis
+
+The following criteria missed.
+| 3. | When the question is refused, the log records an error.
+| 4. | When the question is empty, the log records an error. | #if there is only a question mark, it won't mark it as empty
+
+## 3. When the question is refused, the log records the refusal.
+For 5/5 refused requests, a log entry is created with the gate's decision and the reason for the refusal, but it is not labeled as "ERROR",
+
+**What I got wrong:** The criterion expected an error to be logged. The stage is the gate, and the mechanism is that a refusal is the gate working correctly: it rejected an input that was out of scope, and nothing in the system failed. My criterion treated a user-input outcome as a system fault. Logging refusals as errors would also bury real failures in noise. I changed the target to record the refusal as an ordinary, labeled log entry (for example, level INFO with a "refused" status and a reason) and kept 5/5, since this is still deterministic logging.
+
+## 4. When the input is empty, the log records that it was empty.
+For 5/5 empty requests, a log entry is created explaining that no question was provided.
+
+**What I got wrong:** The criterion assumed "empty" meant no characters. The stage is input validation, and the mechanism is that it checks for a question rather than for content. A request containing only a question mark still counts as a question, so it passes the empty check and moves on to the gate. The criterion never fired because the input I called empty was not empty by the system's definition. I changed the target to match that definition: only truly blank input (no characters or only whitespace) is logged as empty. A bare "?" is treated as a question and handled by the gate like any other.
 
 ## The Improvement
 

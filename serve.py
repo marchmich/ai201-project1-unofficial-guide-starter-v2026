@@ -88,7 +88,8 @@ def ask():
     payload = request.get_json(silent=True) or {}
     question = (payload.get("question") or "").strip()
 
-    if not question:
+    # Empty if blank, or if it has no letters/digits (e.g. "?", "???", "...")
+    if not any(ch.isalnum() for ch in question):
         logging.error(f"Rejected (400): empty question, after {time.perf_counter() - start_time:.4f} seconds")
         return (
             jsonify(
