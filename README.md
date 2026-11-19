@@ -201,12 +201,31 @@ Criteron 5 is still broken. I need to rewrite it to be able to holistically eval
 
 I would formulate my questions better and re-edit the grounding instructions to fit my criteria specifically.
 
-### Capstone
+# Capstone
+
+## What this Extends 
+In Unit 9, I will be extending the RAG system to add a measuring and logging feature.
 
 ## The Shape
-I will be using the RAG system. I will be adding a structured JSON file that logs each query and includes timestamp, retrieval time, INFO or ERROR, and whether the questions was refused or not.
+I will be using shape A. I will be adding a structured JSON file that logs each query and includes timestamp, retrieval time, INFO or ERROR, and whether the questions was refused or not.
 
 Out of scope: I am not building a dashboard, or changing any parameter of my system. I am not adding any features, changing or modifying chunking or retrieval.
+
+## Running It
+To run this script you will need Python 3.13. Then you will need to clone the repo. Then you will run
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+
+This will install all the dependendencies, activate the virtual environment and make sure that when you run python test.py all tests clear. Then you will open another terminal. In the first terminal you will use:
+
+curl -X POST http://localhost:5000/ask \
+    -H 'Content-Type: application/json' \
+    -d '{"question": "  YOUR QUESTION HERE?"}'
+
+In the other terminal you will use:
+
+python serve.py
 
 ## Instrumentation
 
@@ -222,12 +241,26 @@ Out of scope: I am not building a dashboard, or changing any parameter of my sys
 2026-11-18 13:16:00,070 - INFO - 127.0.0.1 - - [18/Nov/2026 13:16:00] "POST /ask HTTP/1.1" 200 -
 
 ## What It Cost
+## What It Cost
+
+**Per run: ~1.3 s** (mean of 6 runs; range 0.18–2.45 s).
+
+**How it was measured:** Used the logs "Task completed in X seconds" line, across 6 runs on Nov 17–18, 2026. No warm-up runs were excluded.
+
+**At 100 runs a day:** 100 × 1.3 s ≈ 132 s, about 2.2 minutes of
+compute per day (18 s to 4 min across the observed range).
+
+**Caveat:** timings cluster into two groups (~0.2 s and ~2.3 s). The fast ones are likely cached or warm runs, so I report the mean rather than the best case. Six runs is a small sample.
+
 2026-11-17 13:30:01,631 - INFO - Task completed in 2.2910 seconds
 2026-11-17 13:36:52,013 - INFO - Task completed in 0.5179 seconds
 2026-11-17 13:37:10,787 - INFO - Task completed in 0.1837 seconds
 2026-11-17 13:42:17,802 - INFO - Task completed in 2.2998 seconds
 2026-11-18 13:16:00,066 - INFO - Task completed in 2.4503 seconds
 2026-11-17 13:37:24,423 - INFO - Task completed in 0.1848 seconds
+
+
+
 
 # Run Log - Before
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
@@ -255,3 +288,9 @@ Out of scope: I am not building a dashboard, or changing any parameter of my sys
   "sources": [],
   "threshold": 0.5
 }
+
+## The Improvement
+
+## What's Still Broken 
+
+## How I Used AI
