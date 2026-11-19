@@ -204,7 +204,7 @@ I would formulate my questions better and re-edit the grounding instructions to 
 ### Capstone
 
 ## The Shape
-Shape A: I will be deploying the RAG system so that it runs on its own, with logging and measurement around it. I am adding a structured JSON file that logs each query and includes timestamp, input(question), output(answer), retrieval time, generation time, chunk count, error, tokens, and measured cost per run. 
+I will be using the RAG system. I will be adding a structured JSON file that logs each query and includes timestamp, retrieval time, INFO or ERROR, and whether the questions was refused or not.
 
 Out of scope: I am not building a dashboard, or changing any parameter of my system. I am not adding any features, changing or modifying chunking or retrieval.
 
@@ -237,3 +237,21 @@ Out of scope: I am not building a dashboard, or changing any parameter of my sys
 | 3. | When the question is refused, the log records an error.| 2/5 | 1/5 | 0/5 | MISSED |
 | 4. | When the question is empty, the log records an error. | 5/5 | 0/5 | 5/5 | MISSED | #if there is only a question mark, it won't mark it as empty
 | 5. | The system works everytime a question inside the corpora is asked. | 4/5 | 4/5 | 4/5 | MET |
+
+## Output
+
+''' curl -X POST http://localhost:5000/ask \
+    -H 'Content-Type: application/json' \
+    -d '{"question": "?"}'
+    '''
+    
+{
+  "answer": "I don't have enough information about that.",
+  "best_distance": 0.8546,
+  "corpus": "advice_threads",
+  "elapsed_time": 2.4788,
+  "question": "?",
+  "refused": true,
+  "sources": [],
+  "threshold": 0.5
+}
